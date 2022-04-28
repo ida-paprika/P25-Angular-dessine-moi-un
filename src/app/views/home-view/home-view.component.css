@@ -1,0 +1,41 @@
+.artist-infos {
+    width: 144%;
+    height: 15em;
+    margin-bottom: -37%;
+    margin-left: -22%;
+    background-image: url("../../../assets/resources/images/taped-paper.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left 0em bottom 0em;
+}
+
+@media screen and (min-width: 576px) {
+    .artist-infos {
+        margin-bottom: -27%;
+        background-size: 100% 90%;
+        background-position: left 0em bottom -0.5em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .artist-infos {
+        margin-bottom: -58%;
+        background-size: 21em 12em;
+        background-position: left 0em bottom 0em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .artist-infos {
+        background-size: 29em 12em;
+        background-position: left 0em bottom 3em;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .artist-infos {
+        margin-bottom: -45%;
+        background-size: 35em 13em;
+        background-position: left 0em bottom 2em;
+    }
+}

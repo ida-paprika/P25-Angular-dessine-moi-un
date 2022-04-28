@@ -1,0 +1,56 @@
+<header class="row bg-light">
+    <nav class="navbar navbar-light bg-light col-8 col-sm-7 col-md-9 col-lg-10 row-md">
+        <div class="ms-auto ms-md-5 text-center text-md-start col-md-12 d-flex flex-column d-md-inline">
+            <a routerLink="/accueil" routerLinkActive="active" class="navbar-brand me-0">
+                <img src="../../../assets/resources/images/sheep2.png" class="float-md-start logo"
+                    alt="Logo dessine-moi-un">
+            </a>
+            <div class="main-nav">
+                <p class="d-none d-md-block">... une fontaine enchantée ... une méduse cosmique ... un mouton
+                    pourfandeur de dragon ...</p>
+                <ul
+                    class="navbar-nav me-auto mb-2 mb-lg-0 mt-md-4 d-flex flex-column flex-md-row justify-content-around text-center">
+                    <li class="nav-item p-2">
+                        <a routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a routerLink="/trouver-un-artiste" routerLinkActive="active" class="nav-link">Trouver un
+                            artiste</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbarop align-items-start d-flex bg-light col-4 col-md-3 col-lg-2">
+        <ul class="mb-2 mb-lg-0 ms-auto me-md-5">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-power d-block text-center"></i>
+                    <span class="">Compte</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a routerLinkActive="active" class="dropdown-item">Se connecter</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a routerLink="/inscription" routerLinkActive="active" class="dropdown-item">Créer un compte</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li class="nav-link">
+                <a routerLink="/inscription" routerLinkActive="active">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Inscription
+                </a>
+            </li>
+            <li class="nav-link">
+                <a routerLinkActive="active">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Connexion
+                </a>
+            </li> -->
+        </ul>
+    </nav>
+</header>
