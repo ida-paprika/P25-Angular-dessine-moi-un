@@ -1,1 +1,46 @@
-<p>find-an-artist-view works!</p>
+<h1>Trouver un artiste</h1>
+
+<section>
+    <form>
+        <div class="mb-3">
+            <p>Choisir un médium</p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="mediumChoices" id="acrylique">
+                <label class="form-check-label" for="acrylique">
+                    Acrylique
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="mediumChoices" id="aquarelle" checked>
+                <label class="form-check-label" for="aquarelle">
+                    Aquarelle
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="mediumChoices" id="fusain" checked>
+                <label class="form-check-label" for="fusain">
+                    Fusain
+                </label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="format" class="form-label">Choisir un format</label>
+            <select id="format" class="form-select" aria-label="Default select example">
+                <option selected>...</option>
+                <option value="A5">A5</option>
+                <option value="A4">A4</option>
+                <option value="A3">A3</option>
+                <option value="A2">A2</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description du projet</label>
+            <textarea class="form-control" id="description" rows="3" aria-describedby="descriptionHelp"></textarea>
+            <div id="descriptionHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="deadline" class="form-label">Date maximale de rendu</label>
+            <input type="date" name="" id="deadline" class="form-control">
+        </div>
+    </form>
+</section>

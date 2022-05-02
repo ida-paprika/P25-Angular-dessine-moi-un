@@ -1,14 +1,45 @@
 <div class="text-center">
     <h1>Créer un compte</h1>
 
-    <ul class="nav nav-tabs nav-fill">
+    <!-- <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
-            <a routerLink="client-sign-up" routerLinkActive="active" class="nav-link h3">Client</a>
+            <a (click)="displayForm(false)" class="nav-link h3" [ngClass]="{'active': isArtist == false}">Client</a>
         </li>
         <li class="nav-item">
-            <a routerLink="artist-sign-up" routerLinkActive="active" class="nav-link h3">Artiste</a>
+            <a (click)="displayForm(true)" class="nav-link h3" [ngClass]="{'active': isArtist == true}">Artiste</a>
         </li>
-    </ul>
+    </ul> -->
 
-    <router-outlet></router-outlet>
+    <div class="row">
+        <button type="button" (click)="displayForm(false)" class="m-2 col-12 col-md btn btn-outline-primary btn-lg"
+            data-bs-toggle="modal" data-bs-target="#signUpForm">
+            Client
+        </button>
+        <button type="button" (click)="displayForm(true)" class="m-2 col-12 col-md btn btn-outline-primary btn-lg"
+            data-bs-toggle="modal" data-bs-target="#signUpForm">
+            Artiste
+        </button>
+    </div>
+
+    <div class="modal fade" id="signUpForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Créer un compte {{ isArtist ? 'Artiste' : 'Client' }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <app-sign-up-form [isArtist]="isArtist"></app-sign-up-form>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- <app-sign-up-form [isArtist]="isArtist"></app-sign-up-form> -->
+
 </div>

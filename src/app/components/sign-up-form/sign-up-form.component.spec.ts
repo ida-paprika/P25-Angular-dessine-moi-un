@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientSignUpTabComponent } from './client-sign-up-tab.component';
+import { SignUpFormComponent } from './sign-up-form.component';
 
-describe('ClientSignUpTabComponent', () => {
-  let component: ClientSignUpTabComponent;
-  let fixture: ComponentFixture<ClientSignUpTabComponent>;
+describe('SignUpFormComponent', () => {
+  let component: SignUpFormComponent;
+  let fixture: ComponentFixture<SignUpFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClientSignUpTabComponent ]
+      declarations: [ SignUpFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClientSignUpTabComponent);
+    fixture = TestBed.createComponent(SignUpFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

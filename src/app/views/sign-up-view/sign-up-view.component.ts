@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpViewComponent implements OnInit {
 
+  public isArtist: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  displayForm(e: boolean) {
+    this.isArtist = e;
   }
 
 }

@@ -1,0 +1,54 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmitForm()" class="d-grid m-2 text-start needs-validation" novalidate>
+    <div class="mb-3" [ngClass]="{'d-none': isArtist == false}">
+        <label for="artistname" class="form-label">Nom d'artiste</label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-brush"></i>
+            </span>
+            <input formControlName="artistName" type="text" class="form-control" id="artistname"
+                aria-describedby="artistnameHelp">
+        </div>
+        <!-- <div class="invalid-feedback">
+            Veuillez renseigner un nom d'artiste
+        </div> -->
+        <!-- <div id="artistnameHelp" class="form-text"
+            [ngClass]="{ 'invalid-feedback': signUpForm.controls['artistName'].invalid }">
+            {{ signUpForm.controls['artistName'].invalid ? 'Veuillez renseigner un nom d\'artiste de ' : 'De ' }}
+            2 à 20 charactères
+        </div> -->
+        <div id="artistnameHelp" class="form-text">
+            De 2 à 20 charactères
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="username" class="form-label">Identifiant</label>
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input formControlName="userName" type="email" class="form-control" id="username"
+                aria-describedby="usernameHelp">
+        </div>
+        <div id="usernameHelp" class="form-text">Doit être une adresse mail valide</div>
+    </div>
+    <div class="mb-3">
+        <label for="userPassword" class="form-label">Mot de passe</label>
+        <div class="input-group">
+            <input formControlName="userPassword" [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                id="userPassword" aria-describedby="passwordHelp">
+            <div class="input-group-append">
+
+                <button type="button" class="input-group-text" (click)="toggleFieldTextType()">
+                    <i class="bi" [ngClass]="{ 'bi-eye-slash': !fieldTextType, 'bi-eye': fieldTextType }">
+                    </i>
+                </button>
+
+            </div>
+        </div>
+        <div id="passwordHelp" class="form-text">De 8 à 12 charactères, doit contenir au moins 1 majuscule, 1
+            minuscule,
+            1 chiffre et 1 charactère spécial</div>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Créer un compte <span class="fw-bold">{{ isArtist? 'Artiste' :
+                'Client' }}</span></button>
+    </div>
+</form>

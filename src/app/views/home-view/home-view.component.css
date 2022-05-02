@@ -19,7 +19,7 @@
 
 @media screen and (min-width: 768px) {
     .artist-infos {
-        margin-bottom: -58%;
+        margin-bottom: -64%;
         background-size: 21em 12em;
         background-position: left 0em bottom 0em;
     }
@@ -27,6 +27,7 @@
 
 @media screen and (min-width: 992px) {
     .artist-infos {
+        margin-bottom: -62%;
         background-size: 29em 12em;
         background-position: left 0em bottom 3em;
     }
@@ -34,7 +35,7 @@
 
 @media screen and (min-width: 1200px) {
     .artist-infos {
-        margin-bottom: -45%;
+        margin-bottom: -50%;
         background-size: 35em 13em;
         background-position: left 0em bottom 2em;
     }

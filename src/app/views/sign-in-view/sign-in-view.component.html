@@ -1,0 +1,28 @@
+<h1 class="mb-3">Se connecter</h1>
+<form class="d-grid col-md-6 mx-auto" #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+    <div class="mb-3">
+        <label for="username" class="form-label">Email</label>
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input name="userName" type="email" class="form-control" id="username" aria-describedby="usernameHelp"
+                ngModel>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <div class="input-group">
+            <input name="userPassword" [type]="fieldTextType ? 'text' : 'password'" class="form-control" id="password"
+                aria-describedby="passwordHelp" ngModel>
+            <div class="input-group-append">
+
+                <button type="button" class="input-group-text" (click)="toggleFieldTextType()">
+                    <i class="bi" [ngClass]="{ 'bi-eye-slash': !fieldTextType, 'bi-eye': fieldTextType }">
+                    </i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </div>
+</form>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArtistSignUpTabComponent } from './artist-sign-up-tab.component';
+import { SignInViewComponent } from './sign-in-view.component';
 
-describe('ArtistSignUpTabComponent', () => {
-  let component: ArtistSignUpTabComponent;
-  let fixture: ComponentFixture<ArtistSignUpTabComponent>;
+describe('SignInViewComponent', () => {
+  let component: SignInViewComponent;
+  let fixture: ComponentFixture<SignInViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArtistSignUpTabComponent ]
+      declarations: [ SignInViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistSignUpTabComponent);
+    fixture = TestBed.createComponent(SignInViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

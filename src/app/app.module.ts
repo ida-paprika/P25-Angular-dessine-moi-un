@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { HomeViewComponent } from './views/home-view/home-view.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundViewComponent } from './views/page-not-found-view/page-not-found-view.component';
 import { FindAnArtistViewComponent } from './views/find-an-artist-view/find-an-artist-view.component';
 import { SignUpViewComponent } from './views/sign-up-view/sign-up-view.component';
-import { ClientSignUpTabComponent } from './tabs/client-sign-up-tab/client-sign-up-tab.component';
-import { ArtistSignUpTabComponent } from './tabs/artist-sign-up-tab/artist-sign-up-tab.component';
+import { SignInViewComponent } from './views/sign-in-view/sign-in-view.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { ArtistSignUpTabComponent } from './tabs/artist-sign-up-tab/artist-sign-
     PageNotFoundViewComponent,
     FindAnArtistViewComponent,
     SignUpViewComponent,
-    ClientSignUpTabComponent,
-    ArtistSignUpTabComponent
+    SignUpFormComponent,
+    SignInViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
