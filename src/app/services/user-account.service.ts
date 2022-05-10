@@ -18,7 +18,7 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/register-client`, body);
+    return this.http.post(`${this.urlApi}/create-client`, body);
   }
 
   public registerArtist(artistName: string, email: string, password: string) {
@@ -27,7 +27,7 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/register-artist`, body);
+    return this.http.post(`${this.urlApi}/create-artist`, body);
   }
 
   public loginUser(email: string, password: string) {

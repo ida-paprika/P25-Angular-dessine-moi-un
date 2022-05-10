@@ -14,6 +14,9 @@ import { PageNotFoundViewComponent } from './views/page-not-found-view/page-not-
 import { FindAnArtistViewComponent } from './views/find-an-artist-view/find-an-artist-view.component';
 import { SignUpViewComponent } from './views/sign-up-view/sign-up-view.component';
 import { SignInViewComponent } from './views/sign-in-view/sign-in-view.component';
+import { ArtistCardComponent } from './components/artist-card/artist-card.component';
+import { PublicProfileArtistComponent } from './components/public-profile-artist/public-profile-artist.component';
+import { ArtistSearchFormComponent } from './components/artist-search-form/artist-search-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { SignInViewComponent } from './views/sign-in-view/sign-in-view.component
     FindAnArtistViewComponent,
     SignUpViewComponent,
     SignUpFormComponent,
-    SignInViewComponent
+    SignInViewComponent,
+    ArtistCardComponent,
+    PublicProfileArtistComponent,
+    ArtistSearchFormComponent
   ],
   imports: [
     BrowserModule,

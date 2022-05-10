@@ -13,3 +13,13 @@
 .main-nav a {
     margin-top: -0.5em;
 }
+
+.btn-outline-secondary:hover {
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.dropdown-menu {
+    position: absolute;
+}
