@@ -17,6 +17,7 @@ import { SignInViewComponent } from './views/sign-in-view/sign-in-view.component
 import { ArtistCardComponent } from './components/artist-card/artist-card.component';
 import { PublicProfileArtistComponent } from './components/public-profile-artist/public-profile-artist.component';
 import { ArtistSearchFormComponent } from './components/artist-search-form/artist-search-form.component';
+import { PrivateProfileViewComponent } from './views/private-profile-view/private-profile-view.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ArtistSearchFormComponent } from './components/artist-search-form/artis
     SignInViewComponent,
     ArtistCardComponent,
     PublicProfileArtistComponent,
-    ArtistSearchFormComponent
+    ArtistSearchFormComponent,
+    PrivateProfileViewComponent
   ],
   imports: [
     BrowserModule,

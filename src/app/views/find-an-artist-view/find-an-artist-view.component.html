@@ -2,11 +2,11 @@
 
 <section>
 
-    <app-artist-search-form></app-artist-search-form>
+    <app-artist-search-form (mediumFormatEvent)="getEstimatedPrice($event)"></app-artist-search-form>
 
 </section>
 
-<section>
+<section *ngIf="estimatedPrice">
     <div>
         <h2 class="">Récapitulatif de la requête :</h2>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non cumque neque recusandae maxime iure quia, quas
@@ -14,7 +14,7 @@
         </p>
     </div>
     <div>
-        <p class="h3">Tarif minimum : <span>200€</span></p>
+        <p class="h3">Tarif minimum : <span>{{estimatedPrice}}€</span></p>
     </div>
 
     <app-artist-card class="row row-cols-1 row-cols-md-4 g-5"></app-artist-card>

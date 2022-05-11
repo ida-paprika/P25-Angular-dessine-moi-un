@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/create-client`, body);
+    return this.http.post(`${this.urlApi}/profiles/create-orderer`, body);
   }
 
   public registerArtist(artistName: string, email: string, password: string) {
@@ -27,16 +28,16 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/create-artist`, body);
+    return this.http.post(`${this.urlApi}/profiles/create-artist`, body);
   }
 
-  public loginUser(email: string, password: string) {
+  public loginUser(email: string, password: string): Observable<{ accessToken: string }> {
     const body = {
       "email": email,
       "password": password
     };
-    return this.http.post<any>(`${this.urlApi}/login`, body);
+    return this.http.post<any>(`${this.urlApi}/profiles/login`, body);
   }
 
-  // public loginUser()
+
 }

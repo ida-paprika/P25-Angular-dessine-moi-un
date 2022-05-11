@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-find-an-artist-view',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FindAnArtistViewComponent implements OnInit {
 
-  constructor() { }
+  public estimatedPrice?: number;
+
+  constructor(private projects: ProjectService) { }
 
   ngOnInit(): void {
+
+  }
+
+  addItem(newItem: any) {
+    console.log(newItem.medium);
+  }
+
+  getEstimatedPrice(event: any) {
+    this.projects.getEstimatedPrice(event.medium, event.format).subscribe({
+      next: (resp: any) => {
+        this.estimatedPrice = resp;
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    });
   }
 
 }

@@ -1,47 +1,56 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div class="mb-3 col-md">
-            <p>Choisir un médium</p>
-            <div class="form-check">
-                <input formControlName="projectMedium" class="form-check-input" type="radio" id="acrylique">
-                <label class="form-check-label" for="acrylique">
-                    Acrylique
+        <div class="mb-3 col-md row row-cols-2 row-cols-md-3 g-4 mt-0 ms-1">
+            <p class="w-100 mt-0 ps-0">Choisir un médium</p>
+            <div *ngFor="let medium of mediumList" class="form-check col mt-0">
+                <input formControlName="projectMedium" class="form-check-input" type="radio" [id]="'medium' + medium.id"
+                    [value]="medium.id">
+                <label class="form-check-label" [for]="'medium' + medium.id">
+                    {{ medium.label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" formControlName="projectMedium" id="aquarelle" checked>
-                <label class="form-check-label" for="aquarelle">
-                    Aquarelle
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" formControlName="projectMedium" id="fusain" checked>
-                <label class="form-check-label" for="fusain">
-                    Fusain
-                </label>
+
+            <div *ngIf="submitted && searchForm.controls['projectMedium'].getError('required')"
+                class="p-1 alert-danger w-100 mt-0">
+                Choisissez un médium
             </div>
         </div>
+
         <div class="mb-3 col-md">
             <label for="format" class="form-label">Choisir un format</label>
             <select formControlName="projectFormat" id="format" class="form-select" aria-label="Default select example">
-                <option selected>...</option>
-                <option value="A5">A5</option>
-                <option value="A4">A4</option>
-                <option value="A3">A3</option>
-                <option value="A2">A2</option>
+                <option *ngFor="let format of formatList" [value]="format.id">{{ format.label }}</option>
             </select>
+            <div *ngIf="submitted && searchForm.controls['projectFormat'].getError('required')"
+                class="p-1 alert-danger">
+                Choisissez un format
+            </div>
         </div>
     </div>
 
     <div class="mb-3">
         <label for="description" class="form-label">Description du projet</label>
+        <!-- delete -->
+        <p>un mouton à réaction chevauchant un arc-en-ciel</p>
+        <!-- delete -->
         <textarea formControlName="projectDescription" class="form-control" id="description" rows="3"
             aria-describedby="descriptionHelp"></textarea>
-        <div id="descriptionHelp" class="form-text">Maximum 250 caractères</div>
+        <div *ngIf="!submitted" id="descriptionHelp" class="form-text">De 50 à 250 caractères</div>
+        <div *ngIf="submitted && searchForm.controls['projectFormat'].getError('required')" class="p-1 alert-danger">
+            Décrivez l'illustration de vos rêves
+        </div>
+        <div *ngIf="submitted && 
+            (searchForm.controls['projectFormat'].getError('minLength') || searchForm.controls['projectFormat'].getError('maxLength'))"
+            class="p-1 alert-danger">
+            Nombre de caractères invalide (doit être compris entre 50 et 250)
+        </div>
     </div>
     <div class="mb-3">
         <label for="deadline" class="form-label">Date maximale de rendu</label>
         <input formControlName="projectDeadline" type="date" id="deadline" class="form-control">
+        <div class="p-1 alert-danger" *ngIf="submitted && searchForm.getError('mismatch' || 'required')">
+            Choisissez une date à venir
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Rechercher</button>
 </form>
