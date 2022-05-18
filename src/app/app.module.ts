@@ -18,6 +18,7 @@ import { ArtistCardComponent } from './components/artist-card/artist-card.compon
 import { PublicProfileArtistComponent } from './components/public-profile-artist/public-profile-artist.component';
 import { ArtistSearchFormComponent } from './components/artist-search-form/artist-search-form.component';
 import { PrivateProfileViewComponent } from './views/private-profile-view/private-profile-view.component';
+import { ProjectsTableComponent } from './components/projects-table/projects-table.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PrivateProfileViewComponent } from './views/private-profile-view/privat
     ArtistCardComponent,
     PublicProfileArtistComponent,
     ArtistSearchFormComponent,
-    PrivateProfileViewComponent
+    PrivateProfileViewComponent,
+    ProjectsTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,93 +1,47 @@
-<div class="col">
+<div *ngFor="let card of artistCards" class="col">
     <div class="card h-100 border-0" style="width: 18rem;">
         <div class="card-content text-center">
-            <h5 class="card-title h3"> Dulk</h5>
+            <h5 class="card-title h3">{{ card.artistName }}</h5>
             <a data-bs-toggle="modal" data-bs-target="#artistProfile">
-                <img src="../../../assets/resources/images/artists/dulk.png" class="card-img-top" alt="...">
+                <img [src]="'../../../assets/resources/images/artists/' + card.artwork" class="card-img-top" alt="...">
                 <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
             </a>
             <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
+                <button *ngIf="isLogged" class="btn btn-outline-dark" type="button" (click)="onClick(card.id)">
+                    Choisir cet artiste
+                </button>
+                <button *ngIf="!isLogged" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#signInModal">
+                    *Choisir cet artiste
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col">
-    <div class="card h-100 border-0" style="width: 18rem;">
-        <div class="card-content text-center">
-            <h5 class="card-title h3"> James Jean </h5>
-            <a>
-                <img src="../../../assets/resources/images/artists/james_jean.jpg" class="card-img-top" alt="...">
-                <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
-            </a>
-            <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
-            </div>
-        </div>
-    </div>
+<div *ngIf="noArtist" class="w-100 p-3 text-center border border-5">
+    <i class="bi bi-emoji-frown h2"></i>
+    <p class="fw-bold h3">Aucun artiste n'est disponible pour ce type de projet</p>
 </div>
 
-<div class="col">
-    <div class="card h-100 border-0" style="width: 18rem;">
-        <div class="card-content text-center">
-            <h5 class="card-title h3"> Joe Fenton </h5>
-            <a>
-                <img src="../../../assets/resources/images/artists/joe_fenton.jpeg" class="card-img-top" alt="...">
-                <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
-            </a>
-            <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
+<!-- Modales -->
+<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Il faut être connecté pour sélectionner un artiste</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-secondary" (click)="signIn = true">Se connecter</button>
+                <button type="button" class="btn btn-secondary" (click)="signIn = false">Créer un compte</button>
+                <app-sign-up-form *ngIf="signIn === false" [isArtist]="false">
+                </app-sign-up-form>
+                <app-sign-in-view *ngIf="signIn" [fromCard]="true"></app-sign-in-view>
             </div>
         </div>
     </div>
 </div>
-
-<div class="col">
-    <div class="card h-100 border-0" style="width: 18rem;">
-        <div class="card-content text-center">
-            <h5 class="card-title h3"> Dulk</h5>
-            <a>
-                <img src="../../../assets/resources/images/artists/dulk.png" class="card-img-top" alt="...">
-                <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
-            </a>
-            <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col">
-    <div class="card h-100 border-0" style="width: 18rem;">
-        <div class="card-content text-center">
-            <h5 class="card-title h3"> James Jean </h5>
-            <a>
-                <img src="../../../assets/resources/images/artists/james_jean.jpg" class="card-img-top" alt="...">
-                <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
-            </a>
-            <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col">
-    <div class="card h-100 border-0" style="width: 18rem;">
-        <div class="card-content text-center">
-            <h5 class="card-title h3"> Joe Fenton </h5>
-            <a data-bs-toggle="modal" data-bs-target="#artistProfile">
-                <img src="../../../assets/resources/images/artists/joe_fenton.jpeg" class="card-img-top" alt="...">
-                <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
-            </a>
-            <div class="card-body">
-                <button class="btn btn-outline-dark">Choisir cet artiste</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modale -->
 
 <div class="modal fade" id="artistProfile" tabindex="-1" aria-labelledby="artistProfileLabel" aria-hidden="true">
     <div class="modal-dialog">

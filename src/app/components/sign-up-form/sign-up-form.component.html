@@ -8,16 +8,16 @@
             <input formControlName="artistName" type="text" class="form-control" id="artistname"
                 aria-describedby="artistnameHelp">
         </div>
-        <!-- <div class="invalid-feedback">
-            Veuillez renseigner un nom d'artiste
-        </div> -->
-        <!-- <div id="artistnameHelp" class="form-text"
-            [ngClass]="{ 'invalid-feedback': signUpForm.controls['artistName'].invalid }">
-            {{ signUpForm.controls['artistName'].invalid ? 'Veuillez renseigner un nom d\'artiste de ' : 'De ' }}
-            2 à 20 charactères
-        </div> -->
-        <div id="artistnameHelp" class="form-text">
+        <div *ngIf="!submitted" id="artistnameHelp" class="form-text">
             De 2 à 20 charactères
+        </div>
+        <div *ngIf="submitted && signUpForm.controls['artistName'].getError('required')" class="p-1 alert-danger">
+            Ce champ est obligatoire
+        </div>
+        <div *ngIf="submitted && 
+                    (signUpForm.controls['artistName'].getError('minLength') || signUpForm.controls['artistName'].getError('maxLength'))"
+            class="p-1 alert-danger">
+            Nombre de caractères invalide (doit être compris entre 2 et 20)
         </div>
     </div>
     <div class="mb-3">
@@ -27,7 +27,13 @@
             <input formControlName="userName" type="email" class="form-control" id="username"
                 aria-describedby="usernameHelp">
         </div>
-        <div id="usernameHelp" class="form-text">Doit être une adresse mail valide</div>
+        <div *ngIf="!submitted" id="usernameHelp" class="form-text">Doit être une adresse mail valide</div>
+        <div *ngIf="submitted && signUpForm.controls['userName'].getError('required')" class="p-1 alert-danger">
+            Ce champ est obligatoire
+        </div>
+        <div *ngIf="submitted && (signUpForm.controls['userName'].getError('email'))" class="p-1 alert-danger">
+            Veuillez saisir une adresse mail valide
+        </div>
     </div>
     <div class="mb-3">
         <label for="userPassword" class="form-label">Mot de passe</label>
@@ -43,12 +49,20 @@
 
             </div>
         </div>
-        <div id="passwordHelp" class="form-text">De 8 à 12 charactères, doit contenir au moins 1 majuscule, 1
-            minuscule,
-            1 chiffre et 1 charactère spécial</div>
+        <div *ngIf="!submitted" id="passwordHelp" class="form-text">De 8 à 12 charactères, doit contenir au moins 1
+            majuscule, 1 minuscule, 1 chiffre et 1 charactère spécial</div>
+        <div *ngIf="submitted && signUpForm.controls['userPassword'].getError('required')" class="p-1 alert-danger">
+            Ce champ est obligatoire
+        </div>
+        <div *ngIf="submitted && (signUpForm.controls['userPassword'].getError('pattern'))" class="p-1 alert-danger">
+            Format invalide (De 8 à 12 charactères, doit contenir au moins 1
+            majuscule, 1 minuscule, 1 chiffre et 1 charactère spécial)
+        </div>
     </div>
     <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Créer un compte <span class="fw-bold">{{ isArtist? 'Artiste' :
-                'Client' }}</span></button>
+        <button type="submit" class="btn btn-primary">
+            Créer un compte <span class="fw-bold">{{ isArtist? 'Artiste' :
+                'Client' }}</span>
+        </button>
     </div>
 </form>

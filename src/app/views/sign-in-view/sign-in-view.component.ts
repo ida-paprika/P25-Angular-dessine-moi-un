@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAccountService } from 'src/app/services/user-account.service';
 
@@ -10,6 +10,7 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 export class SignInViewComponent implements OnInit {
 
   public signInError = false;
+  @Input() fromCard!: boolean;
 
   public fieldTextType: boolean = false;
 
@@ -30,8 +31,15 @@ export class SignInViewComponent implements OnInit {
     REQUEST.subscribe({
       next: (resp: any) => {
         console.log(resp.token);
-        this.router.navigateByUrl('/mon-profil');
         this.storeToken('access_token', resp.token);
+        this.accountService.messenger.next(true);
+        console.log(this.fromCard);
+        if (this.fromCard === true) {
+          this.router.navigateByUrl('/trouver-un-artiste');
+        } else {
+          this.router.navigateByUrl('/mon-profil/812');
+        }
+
       },
       error: (err: any) => {
         this.signInError = true;

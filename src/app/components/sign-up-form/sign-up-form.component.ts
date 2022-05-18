@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { map, retry, catchError } from 'rxjs/operators'
 import { UserAccountService } from 'src/app/services/user-account.service';
 
 @Component({
@@ -11,12 +13,20 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 export class SignUpFormComponent implements OnInit {
 
   @Input() isArtist!: boolean;
-  public signUpError = false;
-  public signUpForm!: FormGroup;
-  public fieldTextType: boolean = false;
+  submitted = false;
+  signUpError = false;
+  modal!: any;
+  modalBg!: any;
+  body!: any;
+  signUpForm!: FormGroup;
+  fieldTextType: boolean = false;
   private passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$";
 
-  constructor(private fb: FormBuilder, private accountService: UserAccountService) { }
+  constructor(
+    private fb: FormBuilder,
+    private accountService: UserAccountService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -41,22 +51,16 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmitForm() {
+    this.submitted = true;
     console.log(this.signUpForm.value);
-
     const username = this.signUpForm.value.userName;
     const password = this.signUpForm.value.userPassword;
     let request;
 
     if (this.isArtist) {
       const artistName = this.signUpForm.value.artistName;
-      // this.accountService.registerArtist(artistName, username, password).subscribe((response) => {
-      //   console.log(response);
-      // });
       request = this.accountService.registerArtist(artistName, username, password);
     } else {
-      // this.accountService.registerClient(username, password).subscribe((response) => {
-      //   console.log(response);
-      // });
       request = this.accountService.registerClient(username, password);
 
     }
@@ -69,14 +73,30 @@ export class SignUpFormComponent implements OnInit {
 
   private signUpUser(request: Observable<any>) {
     request.subscribe({
-      next: (resp: any) => {
-        console.log(resp);
+      next: (resp) => {
+        this.removeBSModal();
+        this.router.navigateByUrl('/connexion');
       },
-      error: (err: any) => {
+      error: (err) => {
         this.signUpError = true;
         console.log(err);
+        // this.handleError(err.message);
       }
     });
+  }
+
+  handleError(err: any) {
+    alert(err);
+  }
+
+  removeBSModal() {
+    this.modal = document.querySelector(".modal");
+    this.modal.parentNode.removeChild(this.modal);
+    this.modalBg = document.querySelector(".modal-backdrop");
+    this.modalBg.parentNode.removeChild(this.modalBg);
+    this.body = document.querySelector("body");
+    this.body.classList.remove("modal-open");
+    this.body.removeAttribute('style')
   }
 
 }

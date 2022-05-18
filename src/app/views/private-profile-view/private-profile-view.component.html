@@ -1,3 +1,28 @@
-<p>private-profile-view works!</p>
+<div class="text-center">
 
-<app-public-profile-artist></app-public-profile-artist>
+    <h1>James Jean</h1>
+
+    <p class="small"><i class="bi bi-check-circle-fill text-success"></i> Ouvert aux requêtes :)</p>
+
+    <a href="https://www.instagram.com/jamesjeanart/" target="_blank" class="h2"><i class="bi bi-instagram"></i></a>
+
+</div>
+
+<section>
+    <h2>Mes projets</h2>
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="en-attente" routerLinkActive="active">En attente</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="en-cours" routerLinkActive="active">En cours</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="termines" routerLinkActive="active">Terminés</a>
+        </li>
+    </ul>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</section>

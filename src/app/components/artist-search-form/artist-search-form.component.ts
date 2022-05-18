@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Format } from 'src/app/interfaces/format';
 import { Medium } from 'src/app/interfaces/medium';
+import { ProjectCreate } from 'src/app/models/project-create';
 import { FormatService } from 'src/app/services/format.service';
 import { MediumService } from 'src/app/services/medium.service';
 
@@ -19,7 +20,7 @@ export class ArtistSearchFormComponent implements OnInit {
   public mediumList!: Medium[];
   public formatList!: Format[];
   public projectPrice!: number;
-  @Output() mediumFormatEvent = new EventEmitter<{}>();
+  @Output() projectFormEvent = new EventEmitter<ProjectCreate>();
 
 
   constructor(
@@ -33,34 +34,32 @@ export class ArtistSearchFormComponent implements OnInit {
     this.getAllFormats();
 
     this.searchForm = this.fb.group({
-      projectMedium: ['', [Validators.required]],
-      projectFormat: ['', [Validators.required]],
-      projectDescription: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(250)]],
-      projectDeadline: ['', [Validators.required]]
+      artMediumId: ['', [Validators.required]],
+      artFormatId: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(255)]],
+      deadline: ['', [Validators.required]]
     },
       {
         validator: this.futureDateValidator
       }
     );
-    this.searchForm.controls['projectFormat'].setValue('1', { onlySelf: true });
+    this.searchForm.controls['artFormatId'].setValue('1', { onlySelf: true });
   }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.searchForm.value);
-    let mediumFormatId = {
-      medium: this.searchForm.controls['projectMedium'].value,
-      format: this.searchForm.controls['projectFormat'].value
-    }
 
-    this.mediumFormatEvent.emit(mediumFormatId);
-    // calculate price
-    // get artistCards
+    const project = new ProjectCreate(
+      this.searchForm.controls['description'].value, this.searchForm.controls['deadline'].value,
+      this.searchForm.controls['artMediumId'].value, this.searchForm.controls['artFormatId'].value
+    );
+    console.log(project);
+    this.projectFormEvent.emit(project);
   }
 
   futureDateValidator(form: FormGroup) {
     const today = new Date();
-    const deadline = new Date(form.get('projectDeadline')?.value);
+    const deadline = new Date(form.get('deadline')?.value);
     if (deadline.getTime() <= today.getTime()) {
       return { mismatch: true };
     } else {

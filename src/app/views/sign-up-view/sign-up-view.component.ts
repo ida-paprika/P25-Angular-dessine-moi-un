@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-sign-up-view',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpViewComponent implements OnInit {
 
-  public isArtist: boolean = false;
+  isArtist: boolean = false;
 
   constructor() { }
 
@@ -17,5 +17,6 @@ export class SignUpViewComponent implements OnInit {
   displayForm(e: boolean) {
     this.isArtist = e;
   }
+
 
 }

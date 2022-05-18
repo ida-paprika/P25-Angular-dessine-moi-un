@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class UserAccountService {
 
   private urlApi: string
+  public messenger = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
     this.urlApi = environment.urlApi;
@@ -37,6 +38,10 @@ export class UserAccountService {
       "password": password
     };
     return this.http.post<any>(`${this.urlApi}/profiles/login`, body);
+  }
+
+  public getUserInfos(userId: number) {
+    return this.http.get(`${this.urlApi}/profiles/${userId}`);
   }
 
 
