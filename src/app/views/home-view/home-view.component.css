@@ -1,8 +1,14 @@
+.artist-name {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
 .artist-infos {
-    width: 144%;
-    height: 15em;
-    margin-bottom: -37%;
-    margin-left: -22%;
+    width: 105%;
+    height: 9em;
+    margin-bottom: -34%;
+    margin-left: 0;
     background-image: url("../../../assets/resources/images/taped-paper.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -11,32 +17,36 @@
 
 @media screen and (min-width: 576px) {
     .artist-infos {
-        margin-bottom: -27%;
-        background-size: 100% 90%;
-        background-position: left 0em bottom -0.5em;
+        margin-bottom: -20%;
+        background-size: 70% 90%;
+        background-position: left 4em bottom -0.5em;
     }
 }
 
 @media screen and (min-width: 768px) {
+    .artist-name {
+        margin-bottom: 0.5em;
+    }
+
     .artist-infos {
-        margin-bottom: -64%;
-        background-size: 21em 12em;
-        background-position: left 0em bottom 0em;
+        margin-bottom: -36%;
+        background-size: 90% 70%;
+        background-position: left 0.5em bottom 0em;
     }
 }
 
 @media screen and (min-width: 992px) {
     .artist-infos {
-        margin-bottom: -62%;
-        background-size: 29em 12em;
-        background-position: left 0em bottom 3em;
+        margin-bottom: -29%;
+        background-size: 80% 85%;
+        background-position: left 2em bottom 0em;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .artist-infos {
-        margin-bottom: -50%;
-        background-size: 35em 13em;
-        background-position: left 0em bottom 2em;
+        margin-bottom: -25%;
+        background-size: 75% 90%;
+        background-position: left 3em bottom 0em;
     }
 }

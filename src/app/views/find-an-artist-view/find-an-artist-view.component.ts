@@ -9,9 +9,8 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class FindAnArtistViewComponent implements OnInit {
 
-  public estimatedPrice?: number;
-  // public mediumAndFormat !: { medium: number, format: number };
-  public projectForm!: ProjectCreate;
+  estimatedPrice?: number;
+  projectForm!: ProjectCreate;
 
   constructor(private projects: ProjectService) { }
 
@@ -27,14 +26,14 @@ export class FindAnArtistViewComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
   }
 
   getProjectForm(event: ProjectCreate) {
-    console.log(event);
     this.projectForm = event;
-    this.getEstimatedPrice(this.projectForm.artMediumId, this.projectForm.artFormatId)
+    this.getEstimatedPrice(this.projectForm.artMediumId, this.projectForm.artFormatId);
   }
 
 }

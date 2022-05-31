@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAccountService } from 'src/app/services/user-account.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   userId = 812;
 
-  constructor(private accounts: UserAccountService, private router: Router) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('access_token');
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = true;
     }
 
-    this.accounts.messenger.subscribe((message: boolean) => {
+    this.auth.messenger.subscribe((message: boolean) => {
       console.log('Logged user !');
       console.log(message);
       this.isAuthenticated = message;

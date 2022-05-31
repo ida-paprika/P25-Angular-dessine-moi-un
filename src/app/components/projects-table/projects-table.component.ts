@@ -19,13 +19,14 @@ export class ProjectsTableComponent implements OnInit {
   }
 
   getOrdererProjects() {
-    this.projects.getOrdererProjects(912).subscribe({
+    this.projects.getOrdererProjects().subscribe({
       next: (resp) => {
         console.log(resp);
         this.isResponseEmpty(resp);
       },
       error: (err) => {
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
   }
@@ -40,7 +41,6 @@ export class ProjectsTableComponent implements OnInit {
 
   onClickDeleteProject(projectId: number) {
 
-
     this.projects.deleteProject(projectId).subscribe({
       next: (resp) => {
         console.log(resp);
@@ -48,6 +48,7 @@ export class ProjectsTableComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
   }

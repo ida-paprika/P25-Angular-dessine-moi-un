@@ -7,7 +7,7 @@
             </a>
             <div class="main-nav">
                 <p class="d-none d-md-block">... une fontaine enchantée ... une méduse cosmique ... un mouton
-                    pourfandeur de dragon ...</p>
+                    pourfendeur de dragon ...</p>
                 <ul
                     class="navbar-nav me-auto mb-2 mb-lg-0 mt-md-4 d-flex flex-column flex-md-row justify-content-around text-center">
                     <li class="nav-item p-2">
@@ -24,10 +24,6 @@
     <nav class="navbar navbar-light align-items-start d-flex col-4 col-md-3 col-lg-2">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto me-md-5">
             <li class="nav-item dropdown">
-                <!-- <a class="nav-link dropdown-toggle h4" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    data-bs-display="static" aria-expanded="false">
-                    <i class="bi bi-power"></i>
-                </a> -->
                 <a class="btn btn-outline-secondary border-0 dropdown-toggle w-100 text-end" type="button"
                     id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i *ngIf="!isAuthenticated" class="bi bi-power h4"></i>
@@ -38,7 +34,7 @@
                         <a routerLink="/connexion" routerLinkActive="active" class="dropdown-item">Se connecter</a>
                     </li>
                     <li *ngIf="isAuthenticated">
-                        <a routerLink="/mon-profil/{{userId}}" routerLinkActive="active" class="dropdown-item">Mon
+                        <a routerLink="/mon-profil" routerLinkActive="active" class="dropdown-item">Mon
                             profil</a>
                     </li>
                     <li>

@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAccountService } from 'src/app/services/user-account.service';
+
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-sign-in-view',
@@ -11,11 +12,12 @@ export class SignInViewComponent implements OnInit {
 
   public signInError = false;
   @Input() fromCard!: boolean;
+  showMsg = false;
 
   public fieldTextType: boolean = false;
 
   constructor(
-    private accountService: UserAccountService,
+    private authent: AuthenticationService,
     private router: Router
   ) { }
 
@@ -26,24 +28,25 @@ export class SignInViewComponent implements OnInit {
   onSubmit(form: any) {
     const username = form.value.userName;
     const password = form.value.userPassword;
-    const REQUEST = this.accountService.loginUser(username, password);
+    const REQUEST = this.authent.loginUser(username, password);
 
     REQUEST.subscribe({
       next: (resp: any) => {
         console.log(resp.token);
         this.storeToken('access_token', resp.token);
-        this.accountService.messenger.next(true);
+        this.authent.messenger.next(true);
         console.log(this.fromCard);
         if (this.fromCard === true) {
           this.router.navigateByUrl('/trouver-un-artiste');
         } else {
-          this.router.navigateByUrl('/mon-profil/812');
+          this.router.navigateByUrl('/mon-profil');
         }
 
       },
       error: (err: any) => {
         this.signInError = true;
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
 
@@ -51,7 +54,7 @@ export class SignInViewComponent implements OnInit {
   }
 
   storeToken(key: string, token: string) {
-    localStorage.setItem(key, JSON.stringify(token));
+    localStorage.setItem(key, token);
   }
 
   deleteToken(key: string) {
@@ -60,6 +63,21 @@ export class SignInViewComponent implements OnInit {
 
   toggleFieldTextType(): void {
     this.fieldTextType = !this.fieldTextType;
+  }
+
+  lostPassword(lostPwdForm: any) {
+    console.log(lostPwdForm.value.userMail);
+    this.showMsg = true;
+    this.authent.lostPassword(lostPwdForm.value.userMail).subscribe({
+      next: (resp: any) => {
+        this.showMsg = true;
+      },
+      error: (err: any) => {
+        console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
+      }
+    });
+
   }
 
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,9 @@ import { PublicProfileArtistComponent } from './components/public-profile-artist
 import { ArtistSearchFormComponent } from './components/artist-search-form/artist-search-form.component';
 import { PrivateProfileViewComponent } from './views/private-profile-view/private-profile-view.component';
 import { ProjectsTableComponent } from './components/projects-table/projects-table.component';
+import { ProfileNamesFormComponent } from './components/profile-names-form/profile-names-form.component';
+import { FirstLetterPipe } from './pipes/first-letter.pipe';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { ProjectsTableComponent } from './components/projects-table/projects-tab
     PublicProfileArtistComponent,
     ArtistSearchFormComponent,
     PrivateProfileViewComponent,
-    ProjectsTableComponent
+    ProjectsTableComponent,
+    ProfileNamesFormComponent,
+    FirstLetterPipe
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,9 @@ import { ProjectsTableComponent } from './components/projects-table/projects-tab
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

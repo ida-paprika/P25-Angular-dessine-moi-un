@@ -15,14 +15,15 @@ const routes: Routes = [
   { path: 'inscription', component: SignUpViewComponent },
   { path: 'connexion', component: SignInViewComponent },
   {
-    path: 'mon-profil/:id-user', canActivate: [AuthGuard], component: PrivateProfileViewComponent, children: [
+    path: 'mon-profil', canActivate: [AuthGuard],
+    component: PrivateProfileViewComponent,
+    children: [
       { path: '', pathMatch: 'full', redirectTo: 'en-attente' },
       { path: 'en-attente', canActivate: [AuthGuard], component: ProjectsTableComponent },
       { path: 'en-cours', canActivate: [AuthGuard], component: ProjectsTableComponent },
       { path: 'termines', canActivate: [AuthGuard], component: ProjectsTableComponent }
     ]
   },
-
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   {
     path: '**', pathMatch: 'full',

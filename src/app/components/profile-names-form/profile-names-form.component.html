@@ -1,0 +1,23 @@
+<form [formGroup]="userNamesForm" (ngSubmit)="onSubmitForm()">
+    <div class="mb-3">
+        <label for="first-name" class="form-label">Prénom</label>
+        <input formControlName="firstName" type="text" class="form-control" id="first-name">
+        <div *ngIf="submitted && userNamesForm.controls['firstName'].getError('required')" class="p-1 alert-danger">
+            Ce champ est obligatoire
+        </div>
+        <div *ngIf="submitted && (userNamesForm.controls['firstName'].getError('pattern'))" class="p-1 alert-danger">
+            Format invalide : doit être composé de lettres et ne pas excéder 20 charactères
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="last-name" class="form-label">Nom</label>
+        <input formControlName="lastName" type="text" class="form-control" id="last-name">
+        <div *ngIf="submitted && userNamesForm.controls['lastName'].getError('required')" class="p-1 alert-danger">
+            Ce champ est obligatoire
+        </div>
+        <div *ngIf="submitted && (userNamesForm.controls['lastName'].getError('pattern'))" class="p-1 alert-danger">
+            Format invalide : doit être composé de lettres et ne pas excéder 50 charactères
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>

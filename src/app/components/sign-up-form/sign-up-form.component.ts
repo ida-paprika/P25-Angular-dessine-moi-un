@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators'
-import { UserAccountService } from 'src/app/services/user-account.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -15,16 +15,17 @@ export class SignUpFormComponent implements OnInit {
   @Input() isArtist!: boolean;
   submitted = false;
   signUpError = false;
-  modal!: any;
-  modalBg!: any;
-  body!: any;
   signUpForm!: FormGroup;
   fieldTextType: boolean = false;
   private passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$";
+  // modal window disabling
+  modal!: any;
+  modalBg!: any;
+  body!: any;
 
   constructor(
     private fb: FormBuilder,
-    private accountService: UserAccountService,
+    private auth: AuthenticationService,
     private router: Router
   ) { }
 
@@ -52,16 +53,16 @@ export class SignUpFormComponent implements OnInit {
 
   onSubmitForm() {
     this.submitted = true;
-    console.log(this.signUpForm.value);
+
     const username = this.signUpForm.value.userName;
     const password = this.signUpForm.value.userPassword;
     let request;
 
     if (this.isArtist) {
       const artistName = this.signUpForm.value.artistName;
-      request = this.accountService.registerArtist(artistName, username, password);
+      request = this.auth.registerArtist(artistName, username, password);
     } else {
-      request = this.accountService.registerClient(username, password);
+      request = this.auth.registerClient(username, password);
 
     }
     this.signUpUser(request);
@@ -80,14 +81,11 @@ export class SignUpFormComponent implements OnInit {
       error: (err) => {
         this.signUpError = true;
         console.log(err);
-        // this.handleError(err.message);
+        alert(err.error.errors);
       }
     });
   }
 
-  handleError(err: any) {
-    alert(err);
-  }
 
   removeBSModal() {
     this.modal = document.querySelector(".modal");
@@ -96,7 +94,7 @@ export class SignUpFormComponent implements OnInit {
     this.modalBg.parentNode.removeChild(this.modalBg);
     this.body = document.querySelector("body");
     this.body.classList.remove("modal-open");
-    this.body.removeAttribute('style')
+    this.body.removeAttribute('style');
   }
 
 }
