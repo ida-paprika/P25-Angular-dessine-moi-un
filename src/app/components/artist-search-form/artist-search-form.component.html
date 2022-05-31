@@ -30,19 +30,16 @@
     <div class="mb-3">
         <hr>
         <label for="description" class="form-label h5">Description du projet</label>
-        <!-- delete -->
-        <p>un mouton à réaction chevauchant un arc-en-ciel</p>
-        <!-- delete -->
         <textarea formControlName="description" class="form-control" id="description" rows="3"
             aria-describedby="descriptionHelp"></textarea>
-        <div *ngIf="!submitted" id="descriptionHelp" class="form-text">De 50 à 250 caractères</div>
+        <div *ngIf="!submitted" id="descriptionHelp" class="form-text">De 20 à 255 caractères</div>
         <div *ngIf="submitted && searchForm.controls['description'].getError('required')" class="p-1 alert-danger">
             Décrivez l'illustration de vos rêves
         </div>
         <div *ngIf="submitted && 
-            (searchForm.controls['description'].getError('minLength') || searchForm.controls['description'].getError('maxLength'))"
+            (searchForm.controls['description'].getError('minlength') || searchForm.controls['description'].getError('maxlength'))"
             class="p-1 alert-danger">
-            Nombre de caractères invalide (doit être compris entre 50 et 250)
+            Nombre de caractères invalide (doit être compris entre 20 et 250)
         </div>
     </div>
 
@@ -50,7 +47,8 @@
         <hr>
         <label for="deadline" class="form-label h5">Date maximale de rendu</label>
         <input formControlName="deadline" type="date" id="deadline" class="form-control">
-        <div class="p-1 alert-danger" *ngIf="submitted && searchForm.getError('mismatch' || 'required')">
+        <div class="p-1 alert-danger"
+            *ngIf="submitted && (searchForm.getError('mismatch') || searchForm.controls['deadline'].getError('required'))">
             Choisissez une date à venir
         </div>
     </div>

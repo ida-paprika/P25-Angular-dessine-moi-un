@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserAccountService {
+export class AuthenticationService {
 
   private urlApi: string
   public messenger = new Subject<boolean>();
@@ -20,7 +20,7 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/profiles/create-orderer`, body);
+    return this.http.post(`${this.urlApi}/auth/create-orderer`, body);
   }
 
   public registerArtist(artistName: string, email: string, password: string) {
@@ -29,7 +29,7 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.urlApi}/profiles/create-artist`, body);
+    return this.http.post(`${this.urlApi}/auth/create-artist`, body);
   }
 
   public loginUser(email: string, password: string): Observable<{ accessToken: string }> {
@@ -37,12 +37,17 @@ export class UserAccountService {
       "email": email,
       "password": password
     };
-    return this.http.post<any>(`${this.urlApi}/profiles/login`, body);
+    return this.http.post<any>(`${this.urlApi}/auth/login`, body);
   }
 
-  public getUserInfos(userId: number) {
-    return this.http.get(`${this.urlApi}/profiles/${userId}`);
+  public lostPassword(email: string) {
+    const body = {
+      "email": email
+    };
+    return this.http.patch(`${this.urlApi}/auth/lost-password`, body);
   }
+
+
 
 
 }

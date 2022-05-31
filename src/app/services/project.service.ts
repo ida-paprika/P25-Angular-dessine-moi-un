@@ -19,44 +19,21 @@ export class ProjectService {
     return this.http.get(`${this.urlApi}/projects/price`, { params: params });
   }
 
-  getOrdererProjects(userId: number) {
-    const param = new HttpParams().set("profileId", userId);
-    return this.http.get(`${this.urlApi}/projects/orderer`, { params: param });
-  }
-
-  getArtistProjects(userId: number) {
-    const param = new HttpParams().set("profileId", userId);
-    return this.http.get(`${this.urlApi}/projects/artist`, { params: param });
-  }
-
   createProject(project: ProjectCreate) {
-
     return this.http.post(`${this.urlApi}/projects`, project);
-
-    // const token = localStorage.getItem("access_token");
-    // return this.http.post(`${this.urlApi}/projects`,
-    //   project,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   }
-    // );
   }
 
   deleteProject(projectId: number) {
-    return this.http.delete(`${this.urlApi}/projects/${projectId}`);
+    return this.http.delete(
+      `${this.urlApi}/projects/${projectId}`);
+  }
 
-    // const token = localStorage.getItem("access_token");
+  getOrdererProjects() {
+    return this.http.get(`${this.urlApi}/projects/orderer`);
+  }
 
-    // return this.http.delete(
-    //   `${this.urlApi}/projects/${projectId}`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   }
-    // );
+  getArtistProjects() {
+    return this.http.get(`${this.urlApi}/projects/artist`);
   }
 
 }

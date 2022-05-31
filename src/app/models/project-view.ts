@@ -1,5 +1,6 @@
 export class ProjectView {
     id: number;
+    createdAt: Date;
     description: string;
     price: number;
     deadline: Date;
@@ -8,9 +9,10 @@ export class ProjectView {
     userName: string;
     progressStatus: string;
 
-    constructor(paramId: number, paramDescription: string, paramPrice: number, paramDeadline: Date,
+    constructor(paramId: number, paramCreatedAt: Date, paramDescription: string, paramPrice: number, paramDeadline: Date,
         paramMediumLabel: string, paramFormatLabel: string, paramUserName: string, paramProgressStatus: string) {
         this.id = paramId;
+        this.createdAt = paramCreatedAt;
         this.description = paramDescription;
         this.price = paramPrice;
         this.deadline = paramDeadline;

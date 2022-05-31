@@ -14,25 +14,19 @@ import { MediumService } from 'src/app/services/medium.service';
   providers: [DatePipe]
 })
 export class ArtistSearchFormComponent implements OnInit {
-
-  public searchForm!: FormGroup;
-  public submitted = false;
-  public mediumList!: Medium[];
-  public formatList!: Format[];
-  public projectPrice!: number;
+  searchForm!: FormGroup; submitted = false;
+  mediumList!: Medium[]; formatList!: Format[];
+  projectPrice!: number;
   @Output() projectFormEvent = new EventEmitter<ProjectCreate>();
 
-
-  constructor(
-    private fb: FormBuilder,
-    private mediums: MediumService,
-    private formats: FormatService
-  ) { }
-
+  constructor(private fb: FormBuilder, private mediums: MediumService,
+    private formats: FormatService) { }
   ngOnInit(): void {
     this.getAllMediums();
     this.getAllFormats();
-
+    this.initForm();
+  }
+  initForm() {
     this.searchForm = this.fb.group({
       artMediumId: ['', [Validators.required]],
       artFormatId: ['', [Validators.required]],
@@ -42,25 +36,20 @@ export class ArtistSearchFormComponent implements OnInit {
       {
         validator: this.futureDateValidator
       }
-    );
-    this.searchForm.controls['artFormatId'].setValue('1', { onlySelf: true });
+    ); this.searchForm.controls['artFormatId'].setValue('1', { onlySelf: true });
   }
-
   onSubmit() {
     this.submitted = true;
-
-    const project = new ProjectCreate(
-      this.searchForm.controls['description'].value, this.searchForm.controls['deadline'].value,
-      this.searchForm.controls['artMediumId'].value, this.searchForm.controls['artFormatId'].value
-    );
-    console.log(project);
-    this.projectFormEvent.emit(project);
+    if (this.searchForm.valid) {
+      const project = new ProjectCreate(this.searchForm.controls['description'].value, this.searchForm.controls['deadline'].value, this.searchForm.controls['artMediumId'].value, this.searchForm.controls['artFormatId'].value);
+      this.projectFormEvent.emit(project);
+    }
   }
 
   futureDateValidator(form: FormGroup) {
     const today = new Date();
     const deadline = new Date(form.get('deadline')?.value);
-    if (deadline.getTime() <= today.getTime()) {
+    if (deadline.getTime() <= today.getTime() || !deadline) {
       return { mismatch: true };
     } else {
       return null;
@@ -74,6 +63,7 @@ export class ArtistSearchFormComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
   }
@@ -85,6 +75,7 @@ export class ArtistSearchFormComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
   }
