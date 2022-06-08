@@ -12,6 +12,7 @@ export class ProfileNamesFormComponent implements OnInit {
   userNamesForm!: FormGroup;
   @Input() userNames!: any;
   submitted = false;
+  success = false;
   @Output() isNamesEvent = new EventEmitter<string>();
 
   constructor(private fb: FormBuilder, private profiles: ProfileService) { }
@@ -52,6 +53,7 @@ export class ProfileNamesFormComponent implements OnInit {
     this.profiles.updateProfileNames(firstName, lastName).subscribe(
       {
         next: (resp: any) => {
+          this.success = true;
           this.isNamesEvent.emit(resp.name);
         },
         error: (err: any) => {

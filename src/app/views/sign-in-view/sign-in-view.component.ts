@@ -38,7 +38,7 @@ export class SignInViewComponent implements OnInit {
       error: (err: any) => {
         this.signInError = true;
         console.log(err);
-        alert("Oups ! Quelque chose s'est mal passé :(");
+        alert("Identifiants incorrects");
       }
     });
 
