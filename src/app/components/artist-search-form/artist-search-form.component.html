@@ -1,11 +1,11 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="mb-3 col-md row row-cols-2 row-cols-md-3 g-4 mt-0 ms-1">
-            <p class="w-100 mt-0 ps-0 h5">Choisir un médium</p>
+            <p class="w-100 mt-0 ps-0 h5 mandatory">Choisir un médium</p>
             <div *ngFor="let medium of mediumList" class="form-check col mt-0">
                 <input formControlName="artMediumId" class="form-check-input" type="radio" [id]="'medium' + medium.id"
                     [value]="medium.id">
-                <label class="form-check-label mandatory" [for]="'medium' + medium.id">
+                <label class="form-check-label" [for]="'medium' + medium.id">
                     {{ medium.label | titlecase }}
                 </label>
             </div>
