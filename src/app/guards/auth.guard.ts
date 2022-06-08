@@ -32,9 +32,9 @@ export class AuthGuard implements CanActivate {
         this.router.navigateByUrl('/connexion');
         return false;
       } else {
+        localStorage.setItem('role', decodedToken.roles[decodedToken.roles.length - 1]);
         return true;
       }
-
     } else {
       this.router.navigateByUrl('/connexion');
       return false;

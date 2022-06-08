@@ -47,6 +47,13 @@ export class AuthenticationService {
     return this.http.patch(`${this.urlApi}/auth/lost-password`, body);
   }
 
+  public updatePassword(oldPwd: string, newPwd: string) {
+    const body = {
+      "oldPassword": oldPwd,
+      "newPassword": newPwd
+    };
+    return this.http.patch(`${this.urlApi}/auth/reset-password`, body);
+  }
 
 
 

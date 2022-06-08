@@ -3,7 +3,7 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">Passé le</th>
-                <th scope="col">Envoyé à</th>
+                <th scope="col">{{ role == 'ROLE_ORDERER'? 'Envoyé à' : 'Envoyé par' }}</th>
                 <th scope="col">Médium</th>
                 <th scope="col">Format</th>
                 <th scope="col">Description</th>
@@ -28,10 +28,23 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.deadline | date: 'dd/MM/yy' }}</td>
                 <td>{{ project.price }}€</td>
-                <td>
-                    <button *ngIf="project.progressStatus == 'En attente'" type="button" value="Annuler"
+                <td *ngIf="role == 'ROLE_ORDERER'">
+                    <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Annuler"
                         class="text-danger btn p-0" (click)="onClickDeleteProject(project.id)">
                         <i class="bi bi-x-square-fill"></i>
+                    </button>
+                    <p *ngIf="project.progressStatus != 'WAITING'">
+                        {{ project.progressStatus == 'IN_PROGRESS' ? '(en cours)' : '(terminé)' }}
+                    </p>
+                </td>
+                <td *ngIf="role == 'ROLE_ARTIST'">
+                    <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Annuler"
+                        class="text-danger btn p-0" (click)="onClickDeleteProject(project.id)">
+                        <i class="bi bi-x-square-fill"></i>Refuser
+                    </button>
+                    <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Accepter"
+                        class="text-success btn p-0" (click)="onClickAcceptProject(project.id)">
+                        <i class="bi bi-check-square-fill"></i>Accepter
                     </button>
                 </td>
             </tr>

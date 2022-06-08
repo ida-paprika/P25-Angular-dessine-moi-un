@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArtistService } from 'src/app/services/artist.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -7,28 +8,54 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./private-profile-view.component.css']
 })
 export class PrivateProfileViewComponent implements OnInit {
-  userNames = { firstName: '', lastName: '' };
 
-  constructor(private profiles: ProfileService) { }
+  role!: string | null;
+  userNames = { firstName: '', lastName: '' };
+  artist!: { artistName: string, instagramUrl: string };
+  tab!: string;
+
+  constructor(private profiles: ProfileService, private artists: ArtistService) { }
 
   ngOnInit(): void {
-    this.getUserNames();
+    if (localStorage.getItem('role') != null) {
+      this.role = localStorage.getItem('role');
 
+      if (this.role == 'ROLE_ORDERER') {
+        this.getUserNames();
+      } else if (this.role == 'ROLE_ARTIST') {
+        this.getArtistProfile();
+      }
+    }
   }
 
+
   getUserNames(): any {
-    this.profiles.getProfileNames()?.subscribe(
-      {
-        next: (resp: any) => {
-          console.log(resp);
-          this.userNames = resp;
-        },
-        error: (err) => {
-          console.log(err);
-          alert("Oups ! Quelque chose s'est mal passé :(");
-        }
+    this.profiles.getProfileNames()?.subscribe({
+      next: (resp: any) => {
+        this.userNames = resp;
+      },
+      error: (err) => {
+        console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
       }
-    );
+    });
+  }
+
+  getArtistProfile(): any {
+    this.artists.getArtistProfile().subscribe({
+      next: (resp: any) => {
+        this.artist = resp;
+        console.log(this.artist);
+      },
+      error: (err) => {
+        console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
+      }
+    });
+  }
+
+  passFilterValue(component: any) {
+    component.filter = this.tab;
   }
 
 }

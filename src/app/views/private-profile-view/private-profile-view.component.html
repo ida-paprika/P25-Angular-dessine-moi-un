@@ -1,8 +1,15 @@
 <div class="text-center">
 
     <h1>Mon profil privé</h1>
-    <div *ngIf="userNames.firstName != null && userNames.lastName != null">
-        <p class="h3">{{ userNames.firstName + " " + ( userNames.lastName | firstLetter ) }}</p>
+    <div *ngIf="role == 'ROLE_ORDERER'">
+        <div *ngIf="userNames.firstName != null && userNames.lastName != null">
+            <p class="h3">{{ userNames.firstName + " " + ( userNames.lastName | firstLetter ) }}</p>
+        </div>
+    </div>
+    <div *ngIf="role == 'ROLE_ARTIST'">
+        <p class="h3">{{ artist.artistName }}</p>
+        <a *ngIf="artist.instagramUrl != null" [href]="artist.instagramUrl" target="_blank" class="h2"><i
+                class="bi bi-instagram"></i></a>
     </div>
 
 </div>
@@ -11,18 +18,19 @@
     <h2>Mes projets</h2>
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
-            <a class="nav-link" routerLink="en-attente" routerLinkActive="active">En attente</a>
+            <a class="nav-link" routerLink="en-attente" routerLinkActive="active" (click)="tab = 'waiting'">En
+                attente</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="en-cours" routerLinkActive="active">En cours</a>
+            <a class="nav-link" routerLink="en-cours" routerLinkActive="active" (click)="tab = 'progress'">En cours</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="termines" routerLinkActive="active">Terminés</a>
+            <a class="nav-link" routerLink="termines" routerLinkActive="active" (click)="tab = 'done'">Terminés</a>
         </li>
     </ul>
 
     <div>
-        <router-outlet></router-outlet>
+        <router-outlet (activate)="passFilterValue($event)"></router-outlet>
     </div>
 </section>
 
@@ -37,7 +45,24 @@
         <div id="collapse" class="accordion-collapse collapse" aria-labelledby="heading"
             data-bs-parent="#accordionForm">
             <div class="accordion-body">
-                <app-profile-names-form></app-profile-names-form>
+                <app-profile-names-form [userNames]="userNames"></app-profile-names-form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mx-5 mt-5" id="accordion2Form">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse">
+                Modifier mon mot de passe
+            </button>
+        </h2>
+        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+            data-bs-parent="#accordionForm2">
+            <div class="accordion-body">
+                <app-update-password-form></app-update-password-form>
             </div>
         </div>
     </div>

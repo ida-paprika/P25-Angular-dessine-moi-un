@@ -22,6 +22,7 @@ import { ProjectsTableComponent } from './components/projects-table/projects-tab
 import { ProfileNamesFormComponent } from './components/profile-names-form/profile-names-form.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
 import { AuthInterceptor } from './auth.interceptor';
+import { UpdatePasswordFormComponent } from './components/update-password-form/update-password-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AuthInterceptor } from './auth.interceptor';
     PrivateProfileViewComponent,
     ProjectsTableComponent,
     ProfileNamesFormComponent,
-    FirstLetterPipe
+    FirstLetterPipe,
+    UpdatePasswordFormComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@
         <label for="password" class="form-label">Mot de passe</label>
         <div class="input-group">
             <input name="userPassword" [type]="fieldTextType ? 'text' : 'password'" class="form-control" id="password"
-                aria-describedby="passwordHelp" ngModel>
+                ngModel>
             <div class="input-group-append">
 
                 <button type="button" class="input-group-text" (click)="toggleFieldTextType()">
@@ -44,7 +44,7 @@
                             <label for="userEmail" class="form-label">Veuillez saisir votre adresse mail</label>
                             <input type="email" name="userMail" class="form-control" id="userEmail"
                                 aria-describedby="emailHelp" ngModel>
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" class="form-text">Votre email restera strictement confidentiel</div>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Envoyer</button>

@@ -23,3 +23,7 @@
 .dropdown-menu {
     position: absolute;
 }
+
+#account-options a {
+    cursor: pointer;
+}

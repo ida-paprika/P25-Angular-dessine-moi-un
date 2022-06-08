@@ -29,7 +29,7 @@
                     <i *ngIf="!isAuthenticated" class="bi bi-power h4"></i>
                     <i *ngIf="isAuthenticated" class="bi bi-person-circle h4"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <ul id="account-options" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li *ngIf="!isAuthenticated">
                         <a routerLink="/connexion" routerLinkActive="active" class="dropdown-item">Se connecter</a>
                     </li>
@@ -49,18 +49,6 @@
                 </ul>
 
             </li>
-            <!-- <li class="nav-link">
-                <a routerLink="/inscription" routerLinkActive="active">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    Inscription
-                </a>
-            </li>
-            <li class="nav-link">
-                <a routerLinkActive="active">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    Connexion
-                </a>
-            </li> -->
         </ul>
     </nav>
 </header>
