@@ -28,24 +28,27 @@
                 <td>{{ project.description }}</td>
                 <td>{{ project.deadline | date: 'dd/MM/yy' }}</td>
                 <td>{{ project.price }}€</td>
-                <td *ngIf="role == 'ROLE_ORDERER'">
+                <td *ngIf="role == 'ROLE_ORDERER'" class="pt-1">
                     <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Annuler"
-                        class="text-danger btn p-0" (click)="onClickDeleteProject(project.id)">
-                        <i class="bi bi-x-square-fill"></i>
+                        class="text-danger btn btn-lg p-0" (click)="onClickDeleteProject(project.id)">
+                        <i class="bi bi-x-square-fill h3"></i>
                     </button>
                     <p *ngIf="project.progressStatus != 'WAITING'">
                         {{ project.progressStatus == 'IN_PROGRESS' ? '(en cours)' : '(terminé)' }}
                     </p>
                 </td>
-                <td *ngIf="role == 'ROLE_ARTIST'">
+                <td *ngIf="role == 'ROLE_ARTIST'" class="pt-1">
                     <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Annuler"
-                        class="text-danger btn p-0" (click)="onClickDeleteProject(project.id)">
-                        <i class="bi bi-x-square-fill"></i>Refuser
+                        class="text-danger btn btn-lg p-0 mx-2" (click)="onClickDeleteProject(project.id)">
+                        <i class="bi bi-x-square-fill h3"></i>
                     </button>
                     <button *ngIf="project.progressStatus == 'WAITING'" type="button" value="Accepter"
-                        class="text-success btn p-0" (click)="onClickAcceptProject(project.id)">
-                        <i class="bi bi-check-square-fill"></i>Accepter
+                        class="text-success btn btn-lg p-0 mx-2" (click)="onClickAcceptProject(project.id)">
+                        <i class="bi bi-check-square-fill h3"></i>
                     </button>
+                    <p *ngIf="project.progressStatus != 'WAITING'">
+                        {{ project.progressStatus == 'IN_PROGRESS' ? '(en cours)' : '(terminé)' }}
+                    </p>
                 </td>
             </tr>
         </tbody>

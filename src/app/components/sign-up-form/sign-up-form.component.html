@@ -1,6 +1,6 @@
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmitForm()" class="d-grid m-2 text-start needs-validation" novalidate>
     <div class="mb-3" [ngClass]="{'d-none': isArtist == false}">
-        <label for="artistname" class="form-label">Nom d'artiste</label>
+        <label for="artistname" class="form-label mandatory">Nom d'artiste</label>
         <div class="input-group">
             <span class="input-group-text">
                 <i class="bi bi-brush"></i>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <label for="username" class="form-label">Identifiant</label>
+        <label for="username" class="form-label mandatory">Identifiant</label>
         <div class="input-group">
             <span class="input-group-text" id="basic-addon1">@</span>
             <input formControlName="userName" type="email" class="form-control" id="username"
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <label for="userPassword" class="form-label">Mot de passe</label>
+        <label for="userPassword" class="form-label mandatory">Mot de passe</label>
         <div class="input-group">
             <input formControlName="userPassword" [type]="fieldTextType ? 'text' : 'password'" class="form-control"
                 id="userPassword" aria-describedby="passwordHelp">

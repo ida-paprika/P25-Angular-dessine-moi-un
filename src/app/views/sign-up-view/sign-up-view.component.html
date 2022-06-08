@@ -1,22 +1,15 @@
 <div class="text-center">
     <h1>Créer un compte</h1>
 
-    <!-- <ul class="nav nav-tabs nav-fill">
-        <li class="nav-item">
-            <a (click)="displayForm(false)" class="nav-link h3" [ngClass]="{'active': isArtist == false}">Client</a>
-        </li>
-        <li class="nav-item">
-            <a (click)="displayForm(true)" class="nav-link h3" [ngClass]="{'active': isArtist == true}">Artiste</a>
-        </li>
-    </ul> -->
-
-    <div class="row">
-        <button type="button" (click)="displayForm(false)" class="m-2 col-12 col-md btn btn-outline-primary btn-lg"
-            data-bs-toggle="modal" data-bs-target="#signUpForm">
+    <div class="row mx-2 account-type">
+        <button type="button" (click)="displayForm(false)"
+            class="col-12 col-md btn btn-outline-primary btn-lg my-2 mx-0 mx-md-2 py-3" data-bs-toggle="modal"
+            data-bs-target="#signUpForm">
             Client
         </button>
-        <button type="button" (click)="displayForm(true)" class="m-2 col-12 col-md btn btn-outline-primary btn-lg"
-            data-bs-toggle="modal" data-bs-target="#signUpForm">
+        <button type="button" (click)="displayForm(true)"
+            class="col-12 col-md btn btn-outline-primary btn-lg my-2 mx-0 mx-md-2 py-3" data-bs-toggle="modal"
+            data-bs-target="#signUpForm">
             Artiste
         </button>
     </div>

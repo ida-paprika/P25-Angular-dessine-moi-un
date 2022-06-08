@@ -5,8 +5,8 @@
             <div *ngFor="let medium of mediumList" class="form-check col mt-0">
                 <input formControlName="artMediumId" class="form-check-input" type="radio" [id]="'medium' + medium.id"
                     [value]="medium.id">
-                <label class="form-check-label" [for]="'medium' + medium.id">
-                    {{ medium.label }}
+                <label class="form-check-label mandatory" [for]="'medium' + medium.id">
+                    {{ medium.label | titlecase }}
                 </label>
             </div>
             <div *ngIf="submitted && searchForm.controls['artMediumId'].getError('required')"
@@ -17,9 +17,9 @@
 
         <div class="mb-3 col-md">
             <hr class="d-md-none">
-            <label for="format" class="form-label h5">Choisir un format</label>
+            <label for="format" class="form-label h5 mandatory">Choisir un format</label>
             <select formControlName="artFormatId" id="format" class="form-select" aria-label="Default select example">
-                <option *ngFor="let format of formatList" [value]="format.id">{{ format.label }}</option>
+                <option *ngFor="let format of formatList" [value]="format.id">{{ format.label | titlecase }}</option>
             </select>
             <div *ngIf="submitted && searchForm.controls['artFormatId'].getError('required')" class="p-1 alert-danger">
                 Choisissez un format
@@ -29,7 +29,7 @@
 
     <div class="mb-3">
         <hr>
-        <label for="description" class="form-label h5">Description du projet</label>
+        <label for="description" class="form-label h5 mandatory">Description du projet</label>
         <textarea formControlName="description" class="form-control" id="description" rows="3"
             aria-describedby="descriptionHelp"></textarea>
         <div *ngIf="!submitted" id="descriptionHelp" class="form-text">De 20 à 255 caractères</div>
@@ -45,7 +45,7 @@
 
     <div class="mb-3">
         <hr>
-        <label for="deadline" class="form-label h5">Date maximale de rendu</label>
+        <label for="deadline" class="form-label h5 mandatory">Date maximale de rendu</label>
         <input formControlName="deadline" type="date" id="deadline" class="form-control">
         <div class="p-1 alert-danger"
             *ngIf="submitted && (searchForm.getError('mismatch') || searchForm.controls['deadline'].getError('required'))">
