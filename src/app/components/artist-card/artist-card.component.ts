@@ -38,7 +38,7 @@ export class ArtistCardComponent implements OnInit, OnChanges {
       this.checkUserName();
     } else {
       this.isLogged = false;
-      localStorage.setItem('project', JSON.stringify(this.projectForm));
+      // localStorage.setItem('project', JSON.stringify(this.projectForm));
     }
   }
 

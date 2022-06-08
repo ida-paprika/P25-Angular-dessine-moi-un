@@ -18,9 +18,13 @@ export class ArtistService {
     return this.http.get(`${this.urlApi}/artists/cards`, { params: params });
   }
 
-  public getArtistInfos(userId: number) {
+  getArtistInfos(userId: number) {
     let param = new HttpParams().set("profile-id", userId);
     return this.http.get(`${this.urlApi}/artists`, { params: param });
+  }
+
+  getArtistProfile() {
+    return this.http.get(`${this.urlApi}/artists/profile`);
   }
 
 }

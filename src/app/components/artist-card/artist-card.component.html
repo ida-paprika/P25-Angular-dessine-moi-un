@@ -3,7 +3,8 @@
         <div class="card-content text-center">
             <h5 class="card-title h3">{{ card.artistName }}</h5>
             <a data-bs-toggle="modal" data-bs-target="#artistProfile">
-                <img [src]="'../../../assets/resources/images/artists/' + card.artwork" class="card-img-top" alt="...">
+                <img [src]="'../../../assets/resources/images/artists/' + card.artwork" class="card-img-top"
+                    [alt]="'illustration de couverture de '+ card.artistName">
                 <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
             </a>
             <div class="card-body">

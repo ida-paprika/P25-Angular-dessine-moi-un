@@ -14,18 +14,22 @@ import { MediumService } from 'src/app/services/medium.service';
   providers: [DatePipe]
 })
 export class ArtistSearchFormComponent implements OnInit {
-  searchForm!: FormGroup; submitted = false;
-  mediumList!: Medium[]; formatList!: Format[];
+  searchForm!: FormGroup;
+  submitted = false;
+  mediumList!: Medium[];
+  formatList!: Format[];
   projectPrice!: number;
   @Output() projectFormEvent = new EventEmitter<ProjectCreate>();
 
   constructor(private fb: FormBuilder, private mediums: MediumService,
     private formats: FormatService) { }
+
   ngOnInit(): void {
     this.getAllMediums();
     this.getAllFormats();
     this.initForm();
   }
+
   initForm() {
     this.searchForm = this.fb.group({
       artMediumId: ['', [Validators.required]],
@@ -38,10 +42,16 @@ export class ArtistSearchFormComponent implements OnInit {
       }
     ); this.searchForm.controls['artFormatId'].setValue('1', { onlySelf: true });
   }
+
   onSubmit() {
     this.submitted = true;
     if (this.searchForm.valid) {
-      const project = new ProjectCreate(this.searchForm.controls['description'].value, this.searchForm.controls['deadline'].value, this.searchForm.controls['artMediumId'].value, this.searchForm.controls['artFormatId'].value);
+      const project = new ProjectCreate(
+        this.searchForm.controls['description'].value,
+        this.searchForm.controls['deadline'].value,
+        this.searchForm.controls['artMediumId'].value,
+        this.searchForm.controls['artFormatId'].value
+      );
       this.projectFormEvent.emit(project);
     }
   }

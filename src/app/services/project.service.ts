@@ -28,6 +28,10 @@ export class ProjectService {
       `${this.urlApi}/projects/${projectId}`);
   }
 
+  acceptProject(projectId: number) {
+    return this.http.patch(`${this.urlApi}/projects/accept`, projectId);
+  }
+
   getOrdererProjects() {
     return this.http.get(`${this.urlApi}/projects/orderer`);
   }

@@ -10,11 +10,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class SignInViewComponent implements OnInit {
 
-  public signInError = false;
-  @Input() fromCard!: boolean;
+  signInError = false;
   showMsg = false;
-
-  public fieldTextType: boolean = false;
+  fieldTextType: boolean = false;
 
   constructor(
     private authent: AuthenticationService,
@@ -32,15 +30,9 @@ export class SignInViewComponent implements OnInit {
 
     REQUEST.subscribe({
       next: (resp: any) => {
-        console.log(resp.token);
         this.storeToken('access_token', resp.token);
         this.authent.messenger.next(true);
-        console.log(this.fromCard);
-        if (this.fromCard === true) {
-          this.router.navigateByUrl('/trouver-un-artiste');
-        } else {
-          this.router.navigateByUrl('/mon-profil');
-        }
+        this.router.navigateByUrl('/mon-profil');
 
       },
       error: (err: any) => {
@@ -50,7 +42,6 @@ export class SignInViewComponent implements OnInit {
       }
     });
 
-    // redirection vers la page d'accueil (+ modif account options du header)
   }
 
   storeToken(key: string, token: string) {

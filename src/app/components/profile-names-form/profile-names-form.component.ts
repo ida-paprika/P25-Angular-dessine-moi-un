@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -10,25 +10,32 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileNamesFormComponent implements OnInit {
 
   userNamesForm!: FormGroup;
+  @Input() userNames!: any;
   submitted = false;
-  @Input() isNames!: boolean;
-  @Output() isNamesEvent = new EventEmitter<string>();;
+  @Output() isNamesEvent = new EventEmitter<string>();
 
   constructor(private fb: FormBuilder, private profiles: ProfileService) { }
 
   ngOnInit(): void {
+
     this.initForm();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.userNames);
+    this.initForm();
+  }
+
+
   initForm(): void {
     this.userNamesForm = this.fb.group({
-      firstName: ['', [
+      firstName: [(this.userNames.firstName !== null ? this.userNames.firstName : ''), [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(20),
         Validators.pattern('^[A-Za-z0-9çéè-]+$')
       ]],
-      lastName: ['', [
+      lastName: [(this.userNames.lastName !== null ? this.userNames.lastName : ''), [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
@@ -54,5 +61,6 @@ export class ProfileNamesFormComponent implements OnInit {
       }
     );
   }
+
 
 }

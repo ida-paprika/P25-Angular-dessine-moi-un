@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
-import { map, retry, catchError } from 'rxjs/operators'
+import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -53,19 +52,20 @@ export class SignUpFormComponent implements OnInit {
 
   onSubmitForm() {
     this.submitted = true;
+    if (this.signUpForm.controls['userName'].valid && this.signUpForm.controls['userPassword'].valid) {
+      const username = this.signUpForm.value.userName;
+      const password = this.signUpForm.value.userPassword;
+      let request;
 
-    const username = this.signUpForm.value.userName;
-    const password = this.signUpForm.value.userPassword;
-    let request;
+      if (this.isArtist) {
+        const artistName = this.signUpForm.value.artistName;
+        request = this.auth.registerArtist(artistName, username, password);
+      } else {
+        request = this.auth.registerClient(username, password);
 
-    if (this.isArtist) {
-      const artistName = this.signUpForm.value.artistName;
-      request = this.auth.registerArtist(artistName, username, password);
-    } else {
-      request = this.auth.registerClient(username, password);
-
+      }
+      this.signUpUser(request);
     }
-    this.signUpUser(request);
   }
 
   toggleFieldTextType(): void {

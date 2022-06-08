@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProjectView } from 'src/app/models/project-view';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -9,19 +9,44 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectsTableComponent implements OnInit {
 
+  role!: string | null;
   projectList!: ProjectView[];
   noProject = false;
+  filter!: string;
 
   constructor(private projects: ProjectService) { }
 
   ngOnInit(): void {
-    this.getOrdererProjects();
+    if (this.filter != null) {
+      console.log(this.filter);
+    }
+
+    if (localStorage.getItem('role') != null) {
+      this.role = localStorage.getItem('role');
+
+      if (this.role == 'ROLE_ORDERER') {
+        this.getOrdererProjects();
+      } else if (this.role == 'ROLE_ARTIST') {
+        this.getArtistProjects();
+      }
+    }
   }
 
   getOrdererProjects() {
     this.projects.getOrdererProjects().subscribe({
       next: (resp) => {
-        console.log(resp);
+        this.isResponseEmpty(resp);
+      },
+      error: (err) => {
+        console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
+      }
+    });
+  }
+
+  getArtistProjects() {
+    this.projects.getArtistProjects().subscribe({
+      next: (resp) => {
         this.isResponseEmpty(resp);
       },
       error: (err) => {
@@ -36,14 +61,13 @@ export class ProjectsTableComponent implements OnInit {
       this.noProject = true;
     } else {
       this.projectList = resp;
+      this.filterData(this.projectList);
     }
   }
 
   onClickDeleteProject(projectId: number) {
-
     this.projects.deleteProject(projectId).subscribe({
       next: (resp) => {
-        console.log(resp);
         this.projectList = this.projectList.filter(project => project.id !== projectId);
       },
       error: (err) => {
@@ -53,6 +77,35 @@ export class ProjectsTableComponent implements OnInit {
     });
   }
 
+  onClickAcceptProject(projectId: number) {
+    this.projects.acceptProject(projectId).subscribe({
+      next: (resp) => {
+        this.projectList = this.projectList.filter(project => project.id == projectId ? project.progressStatus == 'IN_PROGRESS' : project.progressStatus);
+      },
+      error: (err) => {
+        console.log(err);
+        alert("Oups ! Quelque chose s'est mal passé :(");
+      }
+    });
+  }
+
+  filterData(array: ProjectView[]) {
+    switch (this.filter) {
+      case 'waiting':
+        this.projectList = array.filter(item => item.progressStatus == 'WAINTING');
+        break;
+      case 'progress':
+        this.projectList = array.filter(item => item.progressStatus == 'IN_PROGRESS');
+        break;
+      case 'done':
+        this.projectList = array.filter(item => item.progressStatus == 'DONE');
+        break;
+      default:
+        this.projectList = array;
+        break;
+    }
+
+  }
 }
 
 /* SERVICE

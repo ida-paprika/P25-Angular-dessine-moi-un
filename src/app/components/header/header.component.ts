@@ -11,8 +11,6 @@ export class HeaderComponent implements OnInit {
 
   isAuthenticated = false;
 
-  userId = 812;
-
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,14 +21,13 @@ export class HeaderComponent implements OnInit {
     }
 
     this.auth.messenger.subscribe((message: boolean) => {
-      console.log('Logged user !');
-      console.log(message);
       this.isAuthenticated = message;
     })
   }
 
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('role');
     this.isAuthenticated = false;
     this.router.navigateByUrl('/accueil');
   }
