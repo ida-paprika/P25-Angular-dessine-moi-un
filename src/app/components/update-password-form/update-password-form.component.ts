@@ -12,6 +12,7 @@ export class UpdatePasswordFormComponent implements OnInit {
   updatePwdForm!: FormGroup;
   fieldTextType: boolean = false;
   submitted = false;
+  success = false;
   private passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$";
 
   constructor(
@@ -41,7 +42,7 @@ export class UpdatePasswordFormComponent implements OnInit {
 
       this.auth.updatePassword(oldPwd, newPwd).subscribe({
         next: (resp) => {
-          console.log(resp);
+          this.success = true;
         },
         error: (err) => {
           console.log(err);
