@@ -14,9 +14,7 @@ export class FindAnArtistViewComponent implements OnInit {
 
   constructor(private projects: ProjectService) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   getEstimatedPrice(medium: number, format: number) {
     this.projects.getEstimatedPrice(medium, format).subscribe({
@@ -25,7 +23,6 @@ export class FindAnArtistViewComponent implements OnInit {
         this.projectForm.setPrice(resp);
       },
       error: (err: any) => {
-        console.log(err);
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
@@ -35,5 +32,4 @@ export class FindAnArtistViewComponent implements OnInit {
     this.projectForm = event;
     this.getEstimatedPrice(this.projectForm.artMediumId, this.projectForm.artFormatId);
   }
-
 }

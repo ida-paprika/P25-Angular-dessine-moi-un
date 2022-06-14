@@ -11,7 +11,6 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./artist-card.component.css']
 })
 export class ArtistCardComponent implements OnInit, OnChanges {
-
   @Input() projectForm!: ProjectCreate;
   artistCards?: any[];
   noArtist = false;
@@ -20,10 +19,7 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   signIn!: boolean;
   names = { firstName: '', lastName: '' };
   userName!: string;
-  // modal window disabling
-  modal!: any;
-  modalBg!: any;
-  body!: any;
+  modal!: any; modalBg!: any; body!: any;
 
   constructor(
     private artists: ArtistService,
@@ -38,7 +34,6 @@ export class ArtistCardComponent implements OnInit, OnChanges {
       this.checkUserName();
     } else {
       this.isLogged = false;
-      // localStorage.setItem('project', JSON.stringify(this.projectForm));
     }
   }
 
@@ -49,12 +44,11 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   setUserName(event: string) {
     this.userName = event;
     this.onClick(this.artistId);
-    this.removeBSModal()
+    this.removeBSModal();
   }
 
   setArtistId(event: number) {
     this.artistId = event;
-
   }
 
   onClick(artistId: number) {
@@ -62,11 +56,9 @@ export class ArtistCardComponent implements OnInit, OnChanges {
 
     this.projects.createProject(this.projectForm).subscribe({
       next: (resp) => {
-        console.log(resp);
         this.router.navigateByUrl('/mon-profil');
       },
       error: (err) => {
-        console.log(err);
         this.isLogged = false;
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
@@ -74,16 +66,16 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   }
 
   getArtistCards() {
-    this.artists.getArtistCards(this.projectForm.artMediumId, this.projectForm.artFormatId).subscribe({
-      next: (resp) => {
-        console.log(resp);
-        this.isResponseEmpty(resp);
-      },
-      error: (err) => {
-        console.log(err);
-        alert("Oups ! Quelque chose s'est mal passé :(");
-      }
-    });
+    this.artists.getArtistCards(this.projectForm.artMediumId,
+      this.projectForm.artFormatId).subscribe({
+        next: (resp) => {
+          console.log(resp);
+          this.isResponseEmpty(resp);
+        },
+        error: (err) => {
+          alert("Oups ! Quelque chose s'est mal passé :(");
+        }
+      });
   }
 
   isResponseEmpty(resp: any) {
@@ -101,7 +93,6 @@ export class ArtistCardComponent implements OnInit, OnChanges {
         this.names = resp;
       },
       error: (err: any) => {
-        console.log(err);
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
