@@ -1,5 +1,5 @@
-#artists-of-the-month img {
-    max-height: 70%;
+#artists-of-the-month h1 {
+    background: center / 100% 100% no-repeat url("https://www.pngkit.com/png/full/9-97575_watercolor-brush-strokes-png-clipart-black-and-white.png");
 }
 
 .artist-name {
@@ -21,9 +21,9 @@
 
 @media screen and (min-width: 576px) {
     .artist-infos {
-        margin-bottom: -6em;
-        background-size: 70% 90%;
-        background-position: left 4em bottom -0.5em;
+        margin-bottom: -5.5em;
+        background-size: 100% 90%;
+        background-position: left 0em bottom -0.5em;
     }
 }
 
@@ -33,8 +33,7 @@
     }
 
     .artist-infos {
-        margin-bottom: -6em;
-        background-position: left 4em bottom 0em;
+        background-position: left 0em bottom 0em;
     }
 }
 
