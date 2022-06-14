@@ -80,8 +80,17 @@ export class SignUpFormComponent implements OnInit {
       },
       error: (err) => {
         this.signUpError = true;
-        console.log(err);
-        alert(err.error.errors);
+        const status = err.error.status;
+        switch (status) {
+          case 401:
+            alert('Cet email existe déjà');
+            break;
+          case 500:
+            alert("Oups ! Quelque chose s'est mal passé :(");
+            break;
+          default:
+            alert('Service momentanément indisponible');
+        }
       }
     });
   }
