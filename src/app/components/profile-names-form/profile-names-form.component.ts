@@ -65,7 +65,6 @@ export class ProfileNamesFormComponent implements OnInit {
   }
 
   onSubmitForm() {
-    console.log(this.userNamesForm.value);
     this.submitted = true;
     const firstName = this.userNamesForm.value.firstName;
     const lastName = this.userNamesForm.value.lastName;
