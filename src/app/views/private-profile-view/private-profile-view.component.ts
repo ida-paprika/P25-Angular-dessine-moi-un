@@ -35,7 +35,6 @@ export class PrivateProfileViewComponent implements OnInit {
         this.userNames = resp;
       },
       error: (err) => {
-        console.log(err);
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
@@ -48,7 +47,6 @@ export class PrivateProfileViewComponent implements OnInit {
         console.log(this.artist);
       },
       error: (err) => {
-        console.log(err);
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });

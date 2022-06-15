@@ -18,7 +18,8 @@ const routes: Routes = [
     path: 'mon-profil', canActivate: [AuthGuard],
     component: PrivateProfileViewComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'en-attente' },
+      { path: '', pathMatch: 'full', redirectTo: 'tous' },
+      { path: 'tous', canActivate: [AuthGuard], component: ProjectsTableComponent },
       { path: 'en-attente', canActivate: [AuthGuard], component: ProjectsTableComponent },
       { path: 'en-cours', canActivate: [AuthGuard], component: ProjectsTableComponent },
       { path: 'termines', canActivate: [AuthGuard], component: ProjectsTableComponent }

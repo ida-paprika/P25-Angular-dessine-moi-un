@@ -31,7 +31,8 @@
 </div>
 
 <!-- Modales -->
-<div class="modal fade" id="userNamesModal" tabindex="-1" aria-labelledby="userNamesModalLabel" aria-hidden="true">
+<div *ngIf="userName" class="modal fade" id="userNamesModal" tabindex="-1" aria-labelledby="userNamesModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
