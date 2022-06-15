@@ -37,8 +37,17 @@ export class SignInViewComponent implements OnInit {
       },
       error: (err: any) => {
         this.signInError = true;
-        console.log(err);
-        alert("Identifiants incorrects");
+        const status = err.status;
+        switch (status) {
+          case 401:
+            alert('Identifiants incorrects');
+            break;
+          case 500:
+            alert("Oups ! Quelque chose s'est mal passé :(");
+            break;
+          default:
+            alert('Service momentanément indisponible');
+        }
       }
     });
 
@@ -64,7 +73,6 @@ export class SignInViewComponent implements OnInit {
         this.showMsg = true;
       },
       error: (err: any) => {
-        console.log(err);
         alert("Oups ! Quelque chose s'est mal passé :(");
       }
     });
