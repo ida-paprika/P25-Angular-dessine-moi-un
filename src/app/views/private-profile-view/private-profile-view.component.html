@@ -2,7 +2,7 @@
 
     <h1>Mon profil privé</h1>
     <div *ngIf="role == 'ROLE_ORDERER'">
-        <div *ngIf="userNames.firstName != '' && userNames.lastName != ''">
+        <div *ngIf="userNames.firstName != null && userNames.lastName != null">
             <p class="h3">{{ userNames.firstName + " " + ( userNames.lastName | firstLetter ) }}</p>
         </div>
     </div>
