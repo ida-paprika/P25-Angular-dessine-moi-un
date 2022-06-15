@@ -48,6 +48,7 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   }
 
   setArtistId(event: number) {
+    console.log('test names');
     this.artistId = event;
   }
 
@@ -69,7 +70,6 @@ export class ArtistCardComponent implements OnInit, OnChanges {
     this.artists.getArtistCards(this.projectForm.artMediumId,
       this.projectForm.artFormatId).subscribe({
         next: (resp) => {
-          console.log(resp);
           this.isResponseEmpty(resp);
         },
         error: (err) => {
@@ -90,7 +90,10 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   checkUserName() {
     this.profiles.getProfileNames()?.subscribe({
       next: (resp: any) => {
-        this.names = resp;
+        if (resp.firstName && resp.lastName) {
+          this.names = resp;
+        }
+
       },
       error: (err: any) => {
         alert("Oups ! Quelque chose s'est mal passé :(");

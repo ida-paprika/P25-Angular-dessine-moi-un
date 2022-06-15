@@ -10,6 +10,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileNamesFormComponent implements OnInit {
 
   userNamesForm!: FormGroup;
+  @Input() noCardNames!: boolean;
   @Input() userNames!: any;
   submitted = false;
   success = false;
@@ -18,15 +19,33 @@ export class ProfileNamesFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private profiles: ProfileService) { }
 
   ngOnInit(): void {
-
-    this.initForm();
+    if (this.noCardNames == true) {
+      this.initCardForm();
+    } else {
+      this.initForm();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.userNames);
     this.initForm();
   }
 
+  initCardForm(): void {
+    this.userNamesForm = this.fb.group({
+      firstName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20),
+        Validators.pattern('^[A-Za-z0-9çéè-]+$')
+      ]],
+      lastName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        Validators.pattern('^[A-Za-z0-9çéè-]+$')
+      ]]
+    });
+  }
 
   initForm(): void {
     this.userNamesForm = this.fb.group({
@@ -46,6 +65,7 @@ export class ProfileNamesFormComponent implements OnInit {
   }
 
   onSubmitForm() {
+    console.log(this.userNamesForm.value);
     this.submitted = true;
     const firstName = this.userNamesForm.value.firstName;
     const lastName = this.userNamesForm.value.lastName;
@@ -57,7 +77,6 @@ export class ProfileNamesFormComponent implements OnInit {
           this.isNamesEvent.emit(resp.name);
         },
         error: (err: any) => {
-          console.log(err);
           alert("Oups ! Quelque chose s'est mal passé :(");
         }
       }
