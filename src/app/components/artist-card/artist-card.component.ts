@@ -48,7 +48,6 @@ export class ArtistCardComponent implements OnInit, OnChanges {
   }
 
   setArtistId(event: number) {
-    console.log('test names');
     this.artistId = event;
   }
 
