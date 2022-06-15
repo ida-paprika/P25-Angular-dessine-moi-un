@@ -8,12 +8,12 @@
                 <span class="h6 d-block bg-dark bg-opacity-50 text-light py-1 small">(voir le profil)</span>
             </a>
             <div class="card-body">
-                <button *ngIf="isLogged && (names.firstName != null && names.lastName != null)"
-                    class="btn btn-outline-dark" type="button" (click)="onClick(card.id)">
+                <button *ngIf="isLogged && (names.firstName != '' && names.lastName != '')" class="btn btn-outline-dark"
+                    type="button" (click)="onClick(card.id)">
                     Choisir cet artiste
                 </button>
-                <button *ngIf="isLogged && (names.firstName == null && names.lastName == null)"
-                    class="btn btn-outline-dark" type="button" data-bs-target="#userNamesModal" data-bs-toggle="modal"
+                <button *ngIf="isLogged && (names.firstName == '' && names.lastName == '')" class="btn btn-outline-dark"
+                    type="button" data-bs-target="#userNamesModal" data-bs-toggle="modal"
                     (click)="setArtistId(card.id)">
                     Choisir cet artiste
                 </button>
@@ -31,7 +31,7 @@
 </div>
 
 <!-- Modales -->
-<div *ngIf="userName" class="modal fade" id="userNamesModal" tabindex="-1" aria-labelledby="userNamesModalLabel"
+<div *ngIf="!userName" class="modal fade" id="userNamesModal" tabindex="-1" aria-labelledby="userNamesModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -41,7 +41,8 @@
             </div>
             <div class="modal-body">
                 <p>Votre nom sera communiqué à l'artiste sous la forme "Prénom N."</p>
-                <app-profile-names-form (isNamesEvent)="setUserName($event)"></app-profile-names-form>
+                <app-profile-names-form [noCardNames]="true" (isNamesEvent)="setUserName($event)">
+                </app-profile-names-form>
             </div>
         </div>
     </div>
